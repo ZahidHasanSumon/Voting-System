@@ -1,8 +1,4 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package voting.system;
 
 import com.google.gson.GsonBuilder;
@@ -20,8 +16,9 @@ public class VotingSystem {
     private static String voterID, candidateOP;
     private static int i=0,select, candidateA=0, candidateB=0, candidateC=0, option = 0;
     private static char addMore, tryAgain;
-    public static int difficulty = 5, difficulty1 = 0, counter = 0;
+    public static int difficulty = 5, difficulty1 = 0, counter = 0, validuser = 0;
     private static String name, password;
+    public static String leftAlignFormat = "| %-15s | %-6d |%n";
     
 
     public static void main(String[] args) {
@@ -31,17 +28,18 @@ public class VotingSystem {
            String userName[] = {"admin", "Admin"};
            String userPassword[] = {"admin", "Admin"};
 
-           System.out.println("Enter User Name: ");
+           System.out.println("Enter Username: ");
            name = scan.nextLine();
            System.out.println("Enter Password: ");
            password = scan.nextLine();
              
                
                for(int a = 0; a < userName.length; a++){
-                   
-                   if(name.equals(userName[a]) && password.equals(userPassword[a])){
-                       System.out.println("Successfully login!!!!");
-                       System.out.println("*********************************\n\n\n");
+
+                   if(userName[a].equals(name) && userPassword[a].equals(password)){
+                       System.out.println("Login Successful!!!!");
+                       System.out.println("*********************************\n");
+                       validuser++;
                        System.out.println("Choose Your Algorithm:\nPress 1 for algorithm 1\nPress 2 for algorithm 2");
                        option = scan.nextInt();
                        scan.nextLine();
@@ -100,7 +98,14 @@ public class VotingSystem {
                                            }
 
                                        }
-                                       System.out.println("Cadidate A: " + candidateA + " votes" +"\nCadidate B: " + candidateB +" votes"+"\nCadidate C: " + candidateC +" votes");
+                                       System.out.format("+-----------------+--------+%n");
+                                       System.out.format("| Candidate       | Vote   |%n");
+                                       System.out.format("+-----------------+--------+%n");
+                                       System.out.format(leftAlignFormat, "Cadidate A", candidateA);
+                                       System.out.format(leftAlignFormat, "Cadidate B", candidateB);
+                                       System.out.format(leftAlignFormat, "Cadidate C", candidateC);
+                                       //System.out.println("Cadidate A: " + candidateA + " votes" +"\nCadidate B: " + candidateB +" votes"+"\nCadidate C: " + candidateC +" votes");
+                                       System.out.format("+-----------------+--------+%n");
                                        if(candidateA > candidateB && candidateA > candidateC){
                                            System.out.println("Winner is candidate: A");
 
@@ -112,6 +117,7 @@ public class VotingSystem {
                                        }else{
                                            System.out.println("Draw!!!!");
                                        }
+                                       
 
 
                                        long end = System.currentTimeMillis();
@@ -121,7 +127,7 @@ public class VotingSystem {
                                 }else if(option == 2){
                                 long start = System.currentTimeMillis();
 
-                               do{
+                                 do{
 
                                        System.out.println("This is block "+(i+1));
 
@@ -149,10 +155,7 @@ public class VotingSystem {
                                    System.out.println(blockchainJson);
                                    String last = VoterRecord1.get(VoterRecord1.size() - 1).getCandidate();
 
-
                                    System.out.println("Voting Results: ");
-
-                   //                for(int j = 0; j < VoterRecord1.size(); j++){
 
                                        if(last.equals("A") || last.equals("a")){
                                            candidateA++;
@@ -165,8 +168,15 @@ public class VotingSystem {
 
                                        }
 
-                   //                }
-                                   System.out.println("Cadidate A: " + candidateA + " votes" +"\nCadidate B: " + candidateB +" votes"+"\nCadidate C: " + candidateC +" votes");
+                                       System.out.format("+-----------------+--------+%n");
+                                       System.out.format("| Candidate       | Vote   |%n");
+                                       System.out.format("+-----------------+--------+%n");
+                                       System.out.format(leftAlignFormat, "Cadidate A", candidateA);
+                                       System.out.format(leftAlignFormat, "Cadidate B", candidateB);
+                                       System.out.format(leftAlignFormat, "Cadidate C", candidateC);
+                                       //System.out.println("Cadidate A: " + candidateA + " votes" +"\nCadidate B: " + candidateB +" votes"+"\nCadidate C: " + candidateC +" votes");
+                                       System.out.format("+-----------------+--------+%n");
+                                   //System.out.println("Cadidate A: " + candidateA + " votes" +"\nCadidate B: " + candidateB +" votes"+"\nCadidate C: " + candidateC +" votes");
                                    if(candidateA > candidateB && candidateA > candidateC){
                                        System.out.println("Winner is candidate: A");
 
@@ -179,11 +189,9 @@ public class VotingSystem {
                                        System.out.println("Draw!!!!");
                                    }
 
-
                                    System.out.println("Do you want to add more voter:Y/N");
                                    addMore=scan.next().charAt(0);
                                    scan.nextLine();
-
 
                                    }while(addMore=='Y' || addMore=='y');
 
@@ -191,16 +199,14 @@ public class VotingSystem {
                                    float sec = (end - start) / 1000F;
                                    System.out.println("Total execution time : " + sec + " seconds");
 
-
                                         }
-
-                                      }else{
-                                        System.out.println("Invalid username or, password");
-                                        break;
-
-                                    }
+                                      } 
 
                          }
+               if(validuser == 0){
+               System.out.println("Invalid username or, password");
+               }
+                                  
 
     }
     public static Boolean isChainValid() {
