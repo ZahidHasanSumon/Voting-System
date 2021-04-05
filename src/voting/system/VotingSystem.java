@@ -16,7 +16,8 @@ public class VotingSystem {
     private static String voterID, candidateOP;
     private static int i=0,select, candidateA=0, candidateB=0, candidateC=0, option = 0;
     private static char addMore, tryAgain;
-    public static int difficulty = 5, difficulty1 = 0, counter = 0, validuser = 0;
+    public static int difficulty = 5, difficulty1 = 0;// Difficulty level of algorithms(int difficulty = algorithm 1, int difficulty1 = algorithm 2)
+    public static int counter = 0, validuser = 0;
     private static String name, password;
     public static String leftAlignFormat = "| %-15s | %-6d |%n";
     
