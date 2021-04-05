@@ -11,7 +11,7 @@ import java.util.Date;
  *
  * @author Zahid Hasan
  */
-public class Voter {
+public class VoterAlgo2 {
     public String hash;
     public String previousHash; 
     private String data; //our data will be a simple message.
@@ -19,7 +19,7 @@ public class Voter {
     private int nonce; 
     private String voterId, candidate;
 
-    public Voter(String voterId, String candidate, String previousHash) {
+    public VoterAlgo2(String voterId, String candidate, String previousHash) {
         this.voterId = voterId;
         this.candidate = candidate;
         this.timeStamp = new Date().getTime();
@@ -44,11 +44,9 @@ public class Voter {
     }
     
     
-
-  
-
-    String calculateHash() {
-        String calculatedhash = Hash.getMd5( 
+    
+        String calculateHash() {
+        String calculatedhash = Hash.getSha256( 
 				previousHash +
 				Long.toString(timeStamp) +
 				Integer.toString(nonce) + 
@@ -67,7 +65,6 @@ public class Voter {
 		}
 		System.out.println("Block ID : " + hash);
 	}
-    
     
     
 }
